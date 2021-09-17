@@ -1,0 +1,41 @@
+#include <bits  //stdc++.h>
+
+#include <array>
+#include <iostream>
+#include <vector>
+
+std::array<std::vector<int>, 2> sortIntoOddListAndEvenList(
+    int unsortedNumbers[])
+{
+    std::vector<int> evenNumberList;
+    std::vector<int> oddNumberList;
+    std::array<std::vector<int>, 2> result;
+
+    for (int i = 0; i < sizeof(unsortedNumbers) - 1; i++) {
+        // its an even number
+        if (unsortedNumbers[i] % 2 == 0) {
+            evenNumberList.emplace_back(unsortedNumbers[i])
+        };
+        else {
+            oddNumberList.emplace_back(unsortedNumbers[i])
+        };
+    }
+
+    evenNumberList = std::sort(evenNumberList, evenNumberList.capacity());
+    oddNumberList = std::sort(oddNumberList, oddNumberList.capacity());
+
+    result[0].emplace_back(evenNumberList);
+    result[1].emplace_back(oddNumberList);
+    return result;
+}
+
+void main()
+{
+    int unsorted_number[6] = {3, 7, 2, 0, 4, 9};
+    std::array<std::vector<int>, 2> testResult =
+        sortIntoOddListAndEvenList(unsorted_number);
+
+    for (auto i : testResult[0]) std::cout << i << ' ';
+
+    for (auto j : testResult[1]) std::cout << j << ' ';
+}
